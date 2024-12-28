@@ -1,22 +1,11 @@
 ---
 title: "Peer-graded Assignment:  <br>R Markdown Presentation & Plotly"
 author: "A.B."
-output:
-  ioslides_presentation: default
-  powerpoint_presentation: default
-  slidy_presentation: default
+date: "28 dec 2024"
+output: ioslides_presentation
 ---
 
-```{r echo = FALSE, comments="", include=FALSE}
-df <- data.frame(month_names = c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'))
-rusdate <- format(Sys.Date(), "%d-%m-%y")
-current_date_split <- as.integer(unlist(strsplit(x = rusdate, split = '-')))
-current_month_str <- df$month_names[current_date_split[2]]
-current_date_str <- paste0(current_date_split[1], ' ', current_month_str, ' ', (2000+current_date_split[3]))
-```
-
-## `r current_date_str`
-
+## 
 ```{r, echo=FALSE, message=FALSE}
 library(plotly)
 #plot_ly(data = iris, type = 'scatter', 
@@ -43,4 +32,3 @@ plot_ly(data = iris,
                yaxis = list(range = c(min(iris$Sepal.Width), max(iris$Sepal.Width))))
 
 ```
-
