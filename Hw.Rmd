@@ -1,0 +1,46 @@
+---
+title: "Peer-graded Assignment:  <br>R Markdown Presentation & Plotly"
+author: "A.B."
+output:
+  ioslides_presentation: default
+  powerpoint_presentation: default
+  slidy_presentation: default
+---
+
+```{r echo = FALSE, comments="", include=FALSE}
+df <- data.frame(month_names = c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'))
+rusdate <- format(Sys.Date(), "%d-%m-%y")
+current_date_split <- as.integer(unlist(strsplit(x = rusdate, split = '-')))
+current_month_str <- df$month_names[current_date_split[2]]
+current_date_str <- paste0(current_date_split[1], ' ', current_month_str, ' ', (2000+current_date_split[3]))
+```
+
+## `r current_date_str`
+
+```{r, echo=FALSE, message=FALSE}
+library(plotly)
+#plot_ly(data = iris, type = 'scatter', 
+#        x = ~Sepal.Length, 
+#        y = ~Sepal.Width, 
+#        color = ~Species#, size = ~Petal.Length
+#        ) %>%
+#        layout(title = list(text = "-= My first plotly graph =-", 
+#                            font = list(famioly = 'Times New Roman')))
+plot_ly(data = iris,
+        type = 'scatter') %>% 
+        add_trace(x = ~Sepal.Length,
+                  y = ~Sepal.Width, 
+                  color = ~Species,
+                  opacity = 1,
+                  marker = list(sizemode = 'diameter', 
+                                size = ~Petal.Length*3)) %>%  
+        layout(legend= list(itemsizing='constant')) %>%
+        layout(title = list(text = 'MY FIRST PLOTLY GRAPH', font = list(size = 30)), 
+               plot_bgcolor = "#e5ecf6") %>% 
+        layout(autosize = T, 
+               margin = list(l = 50,r = 50,b = 50,t = 50,pad = 4)) %>%
+        layout(xaxis = list(range = c(min(iris$Sepal.Length), max(iris$Sepal.Length))),
+               yaxis = list(range = c(min(iris$Sepal.Width), max(iris$Sepal.Width))))
+
+```
+
